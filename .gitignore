@@ -54,6 +54,7 @@ bin/OpenSim.Grid.InventoryServer.log
 bin/OpenSim.Grid.MessagingServer.log
 bin/OpenSim.Grid.UserServer.log
 bin/OpenSim.log
+bin/Robust.log
 bin/*.manifest
 bin/crashes/
 Examples/*.dll
