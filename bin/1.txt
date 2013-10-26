@@ -51,6 +51,7 @@ SIM_NAME = sim01
 SIM_DIR = ./grid/sim01
 PIDFile = ./grid/sim01/sim01.pid
 regionload_regionsdir = ./grid/sim01/Regions/
+Stats_URL = jsonSimStats
 logconfig = ./grid/sim01/OpenSim.exe.config
 inifile = OpenSim.ini
 inimaster = OpenSimDefaults.ini
@@ -437,8 +438,6 @@ FreeswitchServiceURL = http://192.168.1.200:8004/fsapi
 [Architecture]
 Include-Architecture = config-include/Grid.ini
 [Environment]
-SIM_NAME = 
-SIM_DIR = 
 [Includes]
 Include-Common = config-include/GridCommon.ini
 [SimulationDataStore]
