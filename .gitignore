@@ -91,3 +91,4 @@ OpenSim/Tests/test-results/
 test-results/
 doc/html
 doc/doxygen.error.log
+*.swp
