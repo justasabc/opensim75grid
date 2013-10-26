@@ -5,5 +5,7 @@
 # inifile    (default)OpenSim.ini
 # inidirectory ./grid/sim01/
 export MONO_THREADS_PER_CPU=125
+#export SIM_NAME ="sim01"
+#export SIM_DIR="./grid/sim01"
 cd ~/ke/opensim/opensim75/bin
 mono ./OpenSim.exe -logconfig=./grid/sim01/OpenSim.exe.config -inimaster=OpenSimDefaults.ini -inifile=OpenSim.ini -inidirectory=./grid/sim01/ 

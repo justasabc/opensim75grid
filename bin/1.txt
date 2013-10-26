@@ -47,8 +47,13 @@ DrawPrimOnMapTile = true
 TextureOnMapTile = true
 enableflyslow = false
 UseTrashOnDelete = True
+SIM_NAME = sim01
+SIM_DIR = ./grid/sim01
+PIDFile = ./grid/sim01/sim01.pid
 regionload_regionsdir = ./grid/sim01/Regions/
 logconfig = ./grid/sim01/OpenSim.exe.config
+inifile = OpenSim.ini
+inimaster = OpenSimDefaults.ini
 inidirectory = ./grid/sim01/
 [Network]
 http_listener_port = 9001
@@ -431,6 +436,9 @@ LocalServiceModule = OpenSim.Services.Connectors.dll:RemoteFreeswitchConnector
 FreeswitchServiceURL = http://192.168.1.200:8004/fsapi
 [Architecture]
 Include-Architecture = config-include/Grid.ini
+[Environment]
+SIM_NAME = 
+SIM_DIR = 
 [Includes]
 Include-Common = config-include/GridCommon.ini
 [SimulationDataStore]
