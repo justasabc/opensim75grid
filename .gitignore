@@ -66,3 +66,4 @@ test-results/
 doc/html
 *.swp
 *.log
+*.pid
