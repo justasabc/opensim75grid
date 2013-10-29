@@ -1,0 +1,11 @@
+source="/root/ke/opensim/opensim75/bin/ke/manager.monitrc"
+dest="/etc/monit/conf.d/manager.monitrc"
+if [ -f $dest ];then
+	rm $dest
+fi
+#ln -s /root/ke/opensim/opensim75/bin/ke/manager.monitrc /etc/monit/conf.d/
+ln -s $source $dest
+echo `ls -l $dest`
+monit reload
+monit summary
+

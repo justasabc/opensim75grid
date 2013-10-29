@@ -1,0 +1,49 @@
+# support for monit
+
+# robust services
+# main
+check process main with pidfile "/root/ke/opensim/opensim75/bin/grid/services/main/main.pid"
+group robust
+start program = "/root/ke/opensim/opensim75/bin/ke/robust start main"
+stop program = "/root/ke/opensim/opensim75/bin/ke/robust stop main"
+if cpu usage > 80% for 4 cycles then restart
+if 5 restarts within 5 cycles then timeout
+if failed host localhost port 8003 then restart
+
+# asset
+check process asset with pidfile "/root/ke/opensim/opensim75/bin/grid/services/asset/asset.pid"
+group robust
+start program = "/root/ke/opensim/opensim75/bin/ke/robust start asset"
+stop program = "/root/ke/opensim/opensim75/bin/ke/robust stop asset"
+if cpu usage > 80% for 4 cycles then restart
+if 5 restarts within 5 cycles then timeout
+if failed host localhost port 8003 then restart
+
+# opensim instances
+# sim01
+check process sim01 with pidfile "/root/ke/opensim/opensim75/bin/grid/instances/sim01/sim01.pid"
+group opensim
+start program = "/root/ke/opensim/opensim75/bin/ke/opensim start sim01"
+stop program = "/root/ke/opensim/opensim75/bin/ke/opensim stop sim01"
+if cpu usage > 80% for 4 cycles then restart
+if 5 restarts within 5 cycles then timeout
+if failed url http://localhost:9001/jsonSimStats/
+        and content != '"SimFPS":0.0,' for 4 cycles
+        then restart
+if failed url http://localhost:9001/jsonSimStats/
+        and content == '"SimFPS":' for 4 cycles
+        then restart
+
+# sim02
+check process sim02 with pidfile "/root/ke/opensim/opensim75/bin/grid/instances/sim02/sim02.pid"
+group opensim
+start program = "/root/ke/opensim/opensim75/bin/ke/opensim start sim02"
+stop program = "/root/ke/opensim/opensim75/bin/ke/opensim stop sim02"
+if cpu usage > 80% for 4 cycles then restart
+if 5 restarts within 5 cycles then timeout
+if failed url http://localhost:9002/jsonSimStats/
+        and content != '"SimFPS":0.0,' for 4 cycles
+        then restart
+if failed url http://localhost:9002/jsonSimStats/
+        and content == '"SimFPS":' for 4 cycles
+        then restart
