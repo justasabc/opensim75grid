@@ -6,7 +6,10 @@ check process main with pidfile "/root/ke/opensim/opensim75/bin/grid/services/ma
 group robust
 start program = "/root/ke/opensim/opensim75/bin/ke/robust start main"
 stop program = "/root/ke/opensim/opensim75/bin/ke/robust stop main"
-if cpu usage > 80% for 4 cycles then restart
+if loadavg (1min) > 4 then alert
+if loadavg (5min) > 2 then alert
+if memory usage > 75% then alert
+if cpu usage > 75% then alert
 if 5 restarts within 5 cycles then timeout
 if failed host localhost port 8003 then restart
 
@@ -15,7 +18,10 @@ check process asset with pidfile "/root/ke/opensim/opensim75/bin/grid/services/a
 group robust
 start program = "/root/ke/opensim/opensim75/bin/ke/robust start asset"
 stop program = "/root/ke/opensim/opensim75/bin/ke/robust stop asset"
-if cpu usage > 80% for 4 cycles then restart
+if loadavg (1min) > 4 then alert
+if loadavg (5min) > 2 then alert
+if memory usage > 75% then alert
+if cpu usage > 75% then alert
 if 5 restarts within 5 cycles then timeout
 if failed host localhost port 8003 then restart
 
@@ -25,7 +31,10 @@ check process sim01 with pidfile "/root/ke/opensim/opensim75/bin/grid/instances/
 group opensim
 start program = "/root/ke/opensim/opensim75/bin/ke/opensim start sim01"
 stop program = "/root/ke/opensim/opensim75/bin/ke/opensim stop sim01"
-if cpu usage > 80% for 4 cycles then restart
+if loadavg (1min) > 4 then alert
+if loadavg (5min) > 2 then alert
+if memory usage > 75% then alert
+if cpu usage > 75% then alert
 if 5 restarts within 5 cycles then timeout
 if failed url http://localhost:9001/jsonSimStats/
         and content != '"SimFPS":0.0,' for 4 cycles
@@ -39,7 +48,10 @@ check process sim02 with pidfile "/root/ke/opensim/opensim75/bin/grid/instances/
 group opensim
 start program = "/root/ke/opensim/opensim75/bin/ke/opensim start sim02"
 stop program = "/root/ke/opensim/opensim75/bin/ke/opensim stop sim02"
-if cpu usage > 80% for 4 cycles then restart
+if loadavg (1min) > 4 then alert
+if loadavg (5min) > 2 then alert
+if memory usage > 75% then alert
+if cpu usage > 75% then alert
 if 5 restarts within 5 cycles then timeout
 if failed url http://localhost:9002/jsonSimStats/
         and content != '"SimFPS":0.0,' for 4 cycles

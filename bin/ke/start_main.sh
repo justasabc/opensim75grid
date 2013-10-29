@@ -1,5 +1,6 @@
 # logconfig (default)Robust.exe.config
 # inifile    (default)Robust.ini
+# console rest|basic|empty(default)
 bin=`dirname "$0"`
 bin=`cd "../$bin"; pwd`
 cd $bin
