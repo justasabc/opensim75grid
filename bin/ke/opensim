@@ -1,16 +1,20 @@
 # manager for opensim
-# opensim start/stop/restart SIM
-
-export MONO_THREADS_PER_CPU=125
-MONO="/usr/bin/mono"
-SCREEN="/usr/bin/screen"
-
-BIN=`dirname "$0"`
-BIN=`cd "../$BIN"; pwd`
-cd $BIN
 
 # define available sim names
+# to be added in the future
 SIMS=(sim01 sim02)
+
+function prepare_env() {
+	BIN=`dirname "$0"`
+	BIN=`cd "../$BIN"; pwd`
+	cd $BIN
+
+	MONO="/usr/bin/mono"
+	SCREEN="/usr/bin/screen"
+	OPENSIM="./OpenSim.exe"
+	ROBUST="./Robust.exe"
+	export MONO_THREADS_PER_CPU=125
+}
 
 function show_help() {
 	echo "Usage:" 
@@ -40,7 +44,7 @@ function sim_exist() {
 function sim_check() {
 # $1 simname
 	if [ ! $1 ];then
-		echo "sim is empty"
+		echo "SIM is empty"
 		show_help
 	fi
 
@@ -63,7 +67,7 @@ function sim_env_setup() {
 }
 
 function sim_start() {
-	$SCREEN -S $SIM_NAME -d -m -l $MONO ./OpenSim.exe -logconfig="$SIM_LOG_CONFIG" -inimaster="OpenSimDefaults.ini" -inifile="OpenSim.ini" -inidirectory="$SIM_DIR"
+	$SCREEN -S $SIM_NAME -d -m -l $MONO $OPENSIM -logconfig="$SIM_LOG_CONFIG" -inimaster="OpenSimDefaults.ini" -inifile="OpenSim.ini" -inidirectory="$SIM_DIR"
 }
 
 function do_start() {
@@ -111,7 +115,6 @@ function sim_status() {
 
 function do_status() {
 	sim_check $1
-	echo "OK"
 	sim_env_setup $1
 	sim_status
 }
@@ -160,6 +163,7 @@ function do_stopall() {
 function main() {
 # $1 start|stop|restart|status
 # $2 simname
+	prepare_env
 	case "$1" in
 	start)
 		do_start $2

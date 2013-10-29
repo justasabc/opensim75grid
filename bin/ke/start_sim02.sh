@@ -4,7 +4,7 @@
 # inimaster  (default)OpenSimDefaults.ini
 # inifile    (default)OpenSim.ini
 # inidirectory ./grid/sim02/
-./common_env.sh
+export MONO_THREADS_PER_CPU=125
 bin=`dirname "$0"`
 bin=`cd "../$bin"; pwd`
 cd $bin
