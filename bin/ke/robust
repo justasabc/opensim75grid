@@ -1,0 +1,5 @@
+# start all robust services
+screen -S main -d -m -l ./start_main.sh
+screen -S asset -d -m -l ./start_asset.sh
+screen -ls
+

@@ -65,5 +65,5 @@ addon-modules
 test-results/
 doc/html
 *.swp
-*.log
+*.log*
 *.pid
