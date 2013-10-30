@@ -25,6 +25,18 @@ if cpu usage > 75% then alert
 if 5 restarts within 5 cycles then timeout
 if failed host localhost port 8003 then restart
 
+# voice
+check process voice with pidfile "/root/ke/opensim/opensim75/bin/grid/services/voice/voice.pid"
+group robust
+start program = "/root/ke/opensim/opensim75/bin/ke/robust start voice"
+stop program = "/root/ke/opensim/opensim75/bin/ke/robust stop voice"
+if loadavg (1min) > 4 then alert
+if loadavg (5min) > 2 then alert
+if memory usage > 75% then alert
+if cpu usage > 75% then alert
+if 5 restarts within 5 cycles then timeout
+if failed host localhost port 8003 then restart
+
 # opensim instances
 # sim01
 check process sim01 with pidfile "/root/ke/opensim/opensim75/bin/grid/instances/sim01/sim01.pid"

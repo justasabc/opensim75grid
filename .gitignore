@@ -67,3 +67,4 @@ doc/html
 *.swp
 *.log*
 *.pid
+bin/*.txt

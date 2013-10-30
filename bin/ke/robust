@@ -2,7 +2,7 @@
 
 # define available robust services
 # to be added in the future
-SERVICES=(main asset)
+SERVICES=(main asset voice)
 
 function prepare_env() {
 	BIN=`dirname "$0"`
