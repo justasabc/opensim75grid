@@ -1,0 +1,91 @@
+# freeswitch server manager
+
+function prepare_env() {
+	SCREEN="/usr/bin/screen"
+	FREESWITCH="/usr/local/freeswitch/bin/freeswitch"
+}
+
+function show_help() {
+	echo "Usage:" 
+	echo "./freeswitch {start|stop|restart|status}"
+	exit 1
+}
+
+function service_env_setup() {
+	SERVICE_NAME="freeswitch"
+	SERVICE_PID="/usr/local/freeswitch/run/freeswitch.pid"
+	SERVICE_LOG="/usr/local/freeswitch/log/freeswitch.log"
+}
+
+function service_start() {
+	$SCREEN -S $SERVICE_NAME -d -m -l $FREESWITCH
+}
+
+function do_start() {
+	service_env_setup
+	if [ -f $SERVICE_PID ];then
+		echo "$SERVICE_NAME has already been started..."
+		exit 1
+	fi
+	service_start # start
+	echo "$SERVICE_NAME is starting..."
+	sleep 1
+	$SCREEN -ls
+}
+
+function service_stop() {
+	kill -9 `cat $SERVICE_PID`
+	rm $SERVICE_PID
+	rm $SERVICE_LOG
+}
+
+function do_stop() {
+	service_env_setup
+	if [ -f $SERVICE_PID ];then
+		service_stop # stop
+		echo "$SERVICE_NAME is stopping..."
+		sleep 1
+		$SCREEN -ls
+	else
+		echo "$SERVICE_NAME has already been stopped"
+	fi
+}
+
+function service_status() {
+	if [ -f $SERVICE_PID ];then
+		echo "$SERVICE_NAME: running"	
+	else
+		echo "$SERVICE_NAME: stopped"	
+	fi
+}
+
+function do_status() {
+	service_env_setup
+	service_status
+}
+
+function main() {
+# $1 start|stop|restart|status
+	prepare_env
+	case "$1" in
+	start)
+		do_start 
+		;;
+	stop)
+		do_stop 
+		;;
+	restart)
+		do_stop 
+		do_start
+		;;
+	status)
+		do_status
+		;;
+	*)
+		show_help
+		;;
+	esac
+}
+
+# start main function with all arguments
+main $@

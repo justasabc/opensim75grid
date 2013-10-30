@@ -86,6 +86,7 @@ function do_start() {
 function service_stop() {
 	kill -9 `cat $SERVICE_PID`
 	rm $SERVICE_PID
+	rm $SERVICE_LOG_FILE
 }
 
 function do_stop() {

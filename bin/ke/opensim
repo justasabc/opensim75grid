@@ -89,6 +89,7 @@ function sim_stop() {
 	kill -9 `cat $SIM_PID`
 	# screen -S sim01 -r -m -X quit
 	rm $SIM_PID
+	rm $SIM_LOG_FILE
 }
 
 function do_stop() {
